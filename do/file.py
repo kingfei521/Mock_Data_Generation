@@ -1,7 +1,7 @@
 import json
 import threading
 from do.data_template import *
-
+from loguru import logger
 
 class SingletonType(type):
     _instance_lock = threading.Lock()
@@ -57,24 +57,25 @@ class File(object):
         """
         with open(self.name + '.sql', 'w+', encoding='utf-8') as f:
             if status:
-                self._table_sql(f, fields)
-                self._sql(f, rows, fields)
+                self._table_sql(self.name, f, fields)
+                self._sql(self.name, f, rows, fields)
             else:
-                self._sql(f, rows, fields)
+                self._sql(self.name, f, rows, fields)
 
         return 'Download Successful'
 
 
 
 
-    def _table_sql(self, f, fields):
+    def _table_sql(self, name, f, fields):
         """
         支持SQL文件，所需的创建表字段格式
         :param f:
         :param fields:
         :return:
         """
-        title = 'CREATE TABLE {}('.format(self.name) + '\r'
+        title = 'CREATE TABLE {}('.format(name) + '\r'
+        logger.debug(title)
         f.write(title)
         i = 0
         for field_name, type_name in fields.items():
@@ -87,7 +88,7 @@ class File(object):
             i += 1
         f.write(');\r')
 
-    def _sql(self, f, rows, fields):
+    def _sql(self,name, f, rows, fields):
         """
         仅插入数据 "INSERT INTO XXXXXXXX"
         :param f:
@@ -102,7 +103,7 @@ class File(object):
             ing = []
             for i in _type_name:
                 ing.append(data_generator(i))
-            sql = 'INSERT INTO {} ('.format(self.name) + ', '.join(_field_name) + ') VALUES {};'.format(tuple(ing))
+            sql = 'INSERT INTO {} ('.format(name) + ', '.join(_field_name) + ') VALUES {};'.format(tuple(ing))
             f.write(sql)
             f.write('\r')
 

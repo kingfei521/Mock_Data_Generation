@@ -166,7 +166,7 @@ class App(object):
 
         ttk.Label(self.root, text='Rows:', font=("times new roman", 20, 'bold')).place(x=500, y=575)
         self.rows = ttk.Entry(self.root, font=('times new roman', 20,))
-        self.rows.insert(0, 10)
+        self.rows.insert(0, 1000)
         self.rows.place(x=560, y=570, width=100)
 
         ttk.Label(self.root, text='Format:', font=("times new roman", 20, 'bold')).place(x=670, y=575)
