@@ -10,9 +10,9 @@ tkinter + faker 开发的一款测试数据生成工具，目前支持json，SQL
 ![Here](https://kingfei521/Mock_Data_Generation/menu2.PNG)
 
 <body>
-<img src="menu2.PNG" alt="coffee">
+<img src="bg_image.png" alt="coffee" style="width: 100px; height: 100px">
 </body>
 
 <br>
 
-<img src="img/menu.PNG" alt="coffee">
+<img src="img/menu.PNG" alt="coffee" style="width: 200px; height: 100px">
