@@ -38,7 +38,7 @@ class App(object):
         # self.bg = ImageTk.PhotoImage(file='bg.jpeg')
         bg = Label(self.root, bg='#fff').place(x=0, y=0, relwidth=1, relheight=1)
 
-        # left image
+        # left img
         self.left = ImageTk.PhotoImage(file='bg_image.png')
         Label(self.root, image=self.left).place(x=-180, y=-50,)
 
