@@ -6,3 +6,11 @@ tkinter + faker 开发的一款测试数据生成工具，目前支持json，SQL
 点击json后的样式
 
 ![Mac启动后的界面](https://github.com/kingfei512/Mock_Data_Generation/raw/main/image/menu2.png)
+
+<body>
+<img src="menu2.png" alt="coffee">
+</body>
+
+<br>
+
+<img src="image/menu.png" alt="coffee">
