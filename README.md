@@ -12,3 +12,6 @@ tkinter + faker 开发的一款测试数据生成工具，目前支持json，SQL
 <br>
 
 <img src="img/menu.jpg" alt="coffee" style="width: 200px; height: 100px"> 
+
+#使用说明
+直接拉去代码带本地，打开项目后回看见Mockdoo.app的图标，理论上直接双击即可运行，「Mac Big Sur 11.1 本机自测OK」
