@@ -1,18 +1,19 @@
 import os
-
 import json
 from tkinter import messagebox as mbox, filedialog
+
+from faker import Faker
 
 from fake import *
 
 
-
 class File(object):
-    def __init__(self, file_name):
+    def __init__(self, file_name, lan):
         self.name = file_name
         self.file_type = ([('JSON', '.json')], [("SQL", "*.sql")], [('CSV', '*.csv')], [('All File', '*')])
+        self.fake = Faker([lan])
 
-    def save_data_json(self, rows, fields, fake_obj, status):
+    def save_data_json(self, rows, fields,status):
         """
         生成SON文件格式
         :param rows:
@@ -28,7 +29,7 @@ class File(object):
                 with open(f_path, 'w+', encoding='utf-8') as f:  # 以列表形式存入导出
                     for i in range(0, int(rows)):
                         for k, v in fields.items():
-                            data[k] = data_generator(v, fake_obj)
+                            data[k] = data_generator(v, self.fake)
                         file.append(data)
                         data = {}
                     json.dump(file, f, indent=4, ensure_ascii=False)
@@ -41,7 +42,7 @@ class File(object):
                 with open(f_path, 'w+', encoding='utf-8') as f:  # 以原始字典形式存入导出
                     for i in range(0, int(rows)):
                         for k, v in fields.items():
-                            data[k] = data_generator(v, fake_obj)
+                            data[k] = data_generator(v, self.fake)
                         json.dump(data, f, ensure_ascii=False)
                         f.write(',')
                         if i == int(rows) - 1:
@@ -52,7 +53,7 @@ class File(object):
             except FileNotFoundError as e:
                 return e
 
-    def create_table_and_open_sql(self, rows, fields,fake_obj, status):
+    def create_table_and_open_sql(self, rows, fields, status):
         """
         生成SQL文件格式
         :param rows: 行数
@@ -66,9 +67,9 @@ class File(object):
             with open(f_path, 'w+', encoding='utf-8') as f:
                 if status:
                     self._table_sql(self.name, f, fields)
-                    self._sql(self.name, f, rows, fields, fake_obj)
+                    self._sql(self.name, f, rows, fields)
                 else:
-                    self._sql(self.name, f, rows, fields, fake_obj)
+                    self._sql(self.name, f, rows, fields)
             return self.onInfo()
         except FileNotFoundError as e:
             return e
@@ -94,7 +95,7 @@ class File(object):
             i += 1
         f.write(');\r')
 
-    def _sql(self,name, f, rows, fields, fake_obj):
+    def _sql(self,name, f, rows, fields):
         """
         仅插入数据 "INSERT INTO XXXXXXXX"
         :param f:
@@ -108,7 +109,7 @@ class File(object):
         for row in range(int(rows)):
             ing = []
             for i in _type_name:
-                ing.append(data_generator(i, fake_obj))
+                ing.append(data_generator(i, self.fake))
             sql = 'INSERT INTO {} ('.format(name) + ', '.join(_field_name) + ') VALUES {};'.format(tuple(ing))
             f.write(sql)
             f.write('\r')
