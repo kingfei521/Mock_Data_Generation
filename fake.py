@@ -1,10 +1,4 @@
 import random
-from faker import Faker
-
-fake = Faker(['it_IT', 'en_US', 'ja_JP', 'zh_CN',
-              'en_CA', 'en_PH', 'en_TH', 'uk_UA'])
-# fake = Faker(['zh_CN'])
-
 
 '''faker伪数据库支持方法'''
 TEMPLATES = {
@@ -70,110 +64,114 @@ TEMPLATES = {
     'Mime Type': 'VARCHAR(100)',  # 随机mime Type
 }
 
+
+
 '''调用生成数据方法'''
-def data_generator(field):
+def data_generator(field, fake_obj):
     if field == 'Id NO.':
-        return fake.random_int()
+        return fake_obj.random_int()
     if field == 'First Name':
-        return fake.first_name()
+        return fake_obj.first_name()
     if field == 'Last Name':
-        return fake.last_name()
+        return fake_obj.last_name()
     if field == 'Email Address':
-        return fake.email()
+        return fake_obj.email()
     if field == 'Gender':
         return random.choice(['Female', 'Male', 'Non-binary'])
     if field == 'IP Address V4':
-        return fake.ipv4()
+        return fake_obj.ipv4()
 
     if field == 'City':
-        return fake.city(),  # 城市
+        return fake_obj.fake.city(),  # 城市
     if field == 'Country':
-        return fake.country(),  # 国家
+        return fake_obj.fake.country(),  # 国家
     if field == 'Country Code':
-        return fake.country_code(),  # 国家编码
-    # 'Area': fake.district(), # 仅支持中国
+        return fake_obj.fake.country_code(),  # 国家编码
+    # 'Area': fake_obj.fake.district(), # 仅支持中国
     if field == 'Latitude':
-        return fake.latitude(),  # 地理坐标：纬度
+        return fake_obj.fake.latitude(),  # 地理坐标：纬度
     if field == 'Longitude':
-        return fake.longitude(),  # 地理坐标：经度
+        return fake_obj.fake.longitude(),  # 地理坐标：经度
     if field == 'Postcode':
-        return fake.postcode(),  # 邮编
-    # 'Province': return fake.province(),  # 台湾，美国没有
+        return fake_obj.fake.postcode(),  # 邮编
+    # 'Province': return fake_obj.fake.province(),  # 台湾，美国没有
     if field == 'Address':
-        return fake.address(),  # 详细地址
+        return fake_obj.fake.address(),  # 详细地址
     if field == 'Street Address':
-        return fake.street_address(),  # 街道地址
+        return fake_obj.fake.street_address(),  # 街道地址
     if field == 'Street Name':
-        return fake.street_name(),  # 街道名
+        return fake_obj.fake.street_name(),  # 街道名
     if field == 'Street Suffix':
-        return fake.street_suffix(),  # 街、路
+        return fake_obj.fake.street_suffix(),  # 街、路
     if field == 'Building NO.':
-        return fake.building_number(),  # 楼牌号 eg：'B座'
+        return fake_obj.fake.building_number(),  # 楼牌号 eg：'B座'
 
     # "基础信息伪数据"
     if field == 'SSN':
-        return fake.ssn(),  # SSN号
+        return fake_obj.fake.ssn(),  # SSN号
     if field == 'Service Business':
-        return fake.bs(),  # 随机公司服务行业
+        return fake_obj.fake.bs(),  # 随机公司服务行业
     if field == 'Company Name':
-        return fake.company(),  # 随机公司名
+        return fake_obj.fake.company(),  # 随机公司名
     if field == 'Card Info':
-        return fake.credit_card_full(),  # 生成完整信用卡信息
+        return fake_obj.fake.credit_card_full(),  # 生成完整信用卡信息
     if field == 'Card NO.':
-        return fake.credit_card_number(card_type=None),  # 生成信用卡号
+        return fake_obj.fake.credit_card_number(card_type=None),  # 生成信用卡号
     if field == 'Card Type':
-        return fake.credit_card_provider(),  # 信用卡类型
+        return fake_obj.fake.credit_card_provider(),  # 信用卡类型
     if field == 'Card Security Code':
-        return fake.credit_card_security_code(),  # 信用卡安全码
+        return fake_obj.fake.credit_card_security_code(),  # 信用卡安全码
     if field == 'Job':
-        return fake.job(),  # 职位
+        return fake_obj.fake.job(),  # 职位
 
     if field == 'First Name(Female)':
-        return fake.first_name_female(),  # 女性 名
+        return fake_obj.fake.first_name_female(),  # 女性 名
     if field == 'First Name(Male)':
-        return fake.first_name_male(),  # 男性 名
+        return fake_obj.fake.first_name_male(),  # 男性 名
     if field == 'Last Name(Female)':
-        return fake.last_name_female(),  # 女性
+        return fake_obj.fake.last_name_female(),  # 女性
     if field == 'Last Name(Male)':
-        return fake.last_name_male(),  # 男性
+        return fake_obj.fake.last_name_male(),  # 男性
     if field == 'Full Name':
-        return fake.name(),  # 随机生成全名
+        return fake_obj.fake.name(),  # 随机生成全名
     if field == 'Male Name':
-        return fake.name_male(),  # 男性全名
+        return fake_obj.fake.name_male(),  # 男性全名
     if field == 'Female Name':
-        return fake.name_female(),  # 女性全名
+        return fake_obj.fake.name_female(),  # 女性全名
     if field == 'ISDN NO.':
-        return fake.msisdn(),  # 移动台国际用户识别码，即移动用户的ISDN号码
+        return fake_obj.fake.msisdn(),  # 移动台国际用户识别码，即移动用户的ISDN号码
     if field == 'Phone NO.':
-        return fake.phone_number(),  # 随机生成电话号
+        return fake_obj.fake.phone_number(),  # 随机生成电话号
     if field == 'NO. Segment(Phone)':
-        return fake.phonenumber_prefix(),  # 随机生成手机号段如'139'
+        return fake_obj.fake.phonenumber_prefix(),  # 随机生成手机号段如'139'
 
     # "网络基础信息伪数据"
     if field == 'Domain Name':
-        return fake.domain_name(),  # 生成域名
+        return fake_obj.fake.domain_name(),  # 生成域名
 
     if field == 'IP Address V6':
-        return fake.ipv6(),  # 随机IP6地址
+        return fake_obj.fake.ipv6(),  # 随机IP6地址
     if field == 'MAC Address':
-        return fake.mac_address(),  # 随机MAC地址
+        return fake_obj.fake.mac_address(),  # 随机MAC地址
     if field == 'URI Address':
-        return fake.uri(),  # 随机URI地址
+        return fake_obj.fake.uri(),  # 随机URI地址
     if field == 'URL Address':
-        return fake.url(),  # 随机URL地址
+        return fake_obj.fake.url(),  # 随机URL地址
     if field == 'User Name':
-        return fake.user_name(),  # 随机用户名
+        return fake_obj.fake.user_name(),  # 随机用户名
 
     # "浏览器信息伪数据"
     if field == 'User Agent':
-        return fake.user_agent(),  # 随机user_agent信息
+        return fake_obj.fake.user_agent(),  # 随机user_agent信息
 
     # "文件信息伪数据"
     if field == 'File Type':
-        return fake.file_extension(),  # 随机文件扩展名如'avi'，'txt'
+        return fake_obj.fake.file_extension(),  # 随机文件扩展名如'avi'，'txt'
     if field == 'File Name':
-        return fake.file_name(),  # 随机文件名（包含扩展名，不包含路径）
+        return fake_obj.fake.file_name(),  # 随机文件名（包含扩展名，不包含路径）
     if field == 'File Path':
-        return fake.file_path(),  # 随机文件路径（包含文件名，扩展名）
+        return fake_obj.fake.file_path(),  # 随机文件路径（包含文件名，扩展名）
     if field == 'Mime Type':
-        return fake.mime_type(),  # 随机mime Type
+        return fake_obj.fake.mime_type(),  # 随机mime Type
+
+

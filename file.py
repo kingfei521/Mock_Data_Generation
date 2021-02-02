@@ -3,7 +3,8 @@ import os
 import json
 from tkinter import messagebox as mbox, filedialog
 
-from fake import data_generator, TEMPLATES
+from fake import *
+
 
 
 class File(object):
@@ -11,7 +12,7 @@ class File(object):
         self.name = file_name
         self.file_type = ([('JSON', '.json')], [("SQL", "*.sql")], [('CSV', '*.csv')], [('All File', '*')])
 
-    def save_data_json(self, rows, fields, status):
+    def save_data_json(self, rows, fields, fake_obj, status):
         """
         生成SON文件格式
         :param rows:
@@ -19,7 +20,6 @@ class File(object):
         :param status:
         :return:
         """
-
         data = {}
         if status:
             try:
@@ -28,32 +28,31 @@ class File(object):
                 with open(f_path, 'w+', encoding='utf-8') as f:  # 以列表形式存入导出
                     for i in range(0, int(rows)):
                         for k, v in fields.items():
-                            data[k] = data_generator(v)
+                            data[k] = data_generator(v, fake_obj)
                         file.append(data)
                         data = {}
                     json.dump(file, f, indent=4, ensure_ascii=False)
-                self.onInfo()
+                return self.onInfo()
             except FileNotFoundError as e:
                 return e
         else:
-
             try:
                 f_path = self.save_box(0)
                 with open(f_path, 'w+', encoding='utf-8') as f:  # 以原始字典形式存入导出
                     for i in range(0, int(rows)):
                         for k, v in fields.items():
-                            data[k] = data_generator(v)
+                            data[k] = data_generator(v, fake_obj)
                         json.dump(data, f, ensure_ascii=False)
                         f.write(',')
                         if i == int(rows) - 1:
-                           return
+                           break
                         f.write('\n')
                         data = {}
-                self.onInfo()
+                return self.onInfo()
             except FileNotFoundError as e:
                 return e
 
-    def create_table_and_open_sql(self, rows, fields, status):
+    def create_table_and_open_sql(self, rows, fields,fake_obj, status):
         """
         生成SQL文件格式
         :param rows: 行数
@@ -67,10 +66,10 @@ class File(object):
             with open(f_path, 'w+', encoding='utf-8') as f:
                 if status:
                     self._table_sql(self.name, f, fields)
-                    self._sql(self.name, f, rows, fields)
+                    self._sql(self.name, f, rows, fields, fake_obj)
                 else:
-                    self._sql(self.name, f, rows, fields)
-            self.onInfo()
+                    self._sql(self.name, f, rows, fields, fake_obj)
+            return self.onInfo()
         except FileNotFoundError as e:
             return e
 
@@ -95,7 +94,7 @@ class File(object):
             i += 1
         f.write(');\r')
 
-    def _sql(self,name, f, rows, fields):
+    def _sql(self,name, f, rows, fields, fake_obj):
         """
         仅插入数据 "INSERT INTO XXXXXXXX"
         :param f:
@@ -109,7 +108,7 @@ class File(object):
         for row in range(int(rows)):
             ing = []
             for i in _type_name:
-                ing.append(data_generator(i))
+                ing.append(data_generator(i, fake_obj))
             sql = 'INSERT INTO {} ('.format(name) + ', '.join(_field_name) + ') VALUES {};'.format(tuple(ing))
             f.write(sql)
             f.write('\r')
@@ -122,4 +121,8 @@ class File(object):
 
     def onInfo(self):
 
-        mbox.showinfo("Information", "Download completed")
+        mbox.showinfo(title="Information", message="Download completed", icon='info')
+
+    def onError(self, e):
+
+        mbox.showinfo(title="ErrrInfo", message="Download file failed reason {}".format(e), icon='info')
