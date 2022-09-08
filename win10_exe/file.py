@@ -108,7 +108,7 @@ class File(object):
     #     except FileNotFoundError as e:
     #         return e
 
-    @print_run_time
+    # @print_run_time
     def save_data_json_thread(self, rows, fields):
         """
         生成JSON文件格式

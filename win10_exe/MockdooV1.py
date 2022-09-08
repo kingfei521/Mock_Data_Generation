@@ -380,7 +380,7 @@ if __name__ == '__main__':
 
     # Logo = PhotoImage(data=LOGO_PNG)
     # root.call('wm', 'iconphoto', root._w, Logo)
-    root.iconbitmap(default=r'F://Mock_Data_Generation-main//foursquare.ico')
+    root.iconbitmap(default=r'F://win10_exe//foursquare.ico')  #图标绝对路径
     Menu_toolbar()
 
     # ----背景图片----
