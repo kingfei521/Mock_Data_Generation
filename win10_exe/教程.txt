@@ -1,0 +1,3 @@
+程序运行： 双击 MockdooV1.exe
+
+代码运行：安装好python及环境和相关包 运行 MockdooV1.py即可

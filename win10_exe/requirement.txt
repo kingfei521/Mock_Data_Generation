@@ -1,0 +1,8 @@
+Faker           14.2.0
+Pillow          9.2.0
+pip             19.2.3
+python-dateutil 2.8.2
+setuptools      41.2.0
+six             1.16.0
+ttkbootstrap    1.9.0
+python 3.8.3

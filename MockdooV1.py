@@ -5,7 +5,6 @@ from ttkthemes import ThemedTk
 from tkinter import *
 from fake import TEMPLATES
 from file import File
-# from faker import Factory
 
 
 
