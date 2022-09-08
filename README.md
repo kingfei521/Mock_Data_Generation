@@ -23,8 +23,13 @@ win效果如下图:
 Mac效果如下图：
 
 <img src="img/V2.png" alt="coffee" style="width: 400px; height: 300px">
+<<<<<<< HEAD
 <img src="img/V2-1.png" alt="coffee" style="width:400px; height: 300px">
 <img src="img/V2-3.png" alt="coffee" style="width: 400px; height: 300px">
+=======
+<img src="img/V2-1.png" alt="coffee" style="width: 200px; height: 100px">
+<img src="img/V2-3.png" alt="coffee" style="width: 200px; height: 100px">
+>>>>>>> 85639bd2aedaec6c9434dab3b70773027f3039d6
 
 #以知BUG和问题
 
