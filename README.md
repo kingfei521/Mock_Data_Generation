@@ -27,7 +27,7 @@ tkinter + faker 开发的一款测试数据生成工具，目前支持json，SQL
 
 效果如下图：
 
-<img src="img/V2.png" alt="coffee" style="width: 200px; height: 100px">
+<img src="img/V2.png" alt="coffee" style="width: 400px; height: 300px">
 <img src="img/V2-1.png" alt="coffee" style="width: 200px; height: 100px">
 <img src="img/V2-3.png" alt="coffee" style="width: 200px; height: 100px">
 
